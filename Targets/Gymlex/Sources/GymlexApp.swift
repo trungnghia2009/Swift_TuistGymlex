@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import OnboardingUI
 
 @main
 struct GymlexApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("Bye bye AppDelegate!!")
+            NavigationStack {
+                WelcomeScreen()
+            }
         }
     }
 }

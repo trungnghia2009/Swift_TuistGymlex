@@ -6,10 +6,15 @@ private let bundleVersion: String = "1"
 private let iOSTargetVersion: String = "16.0"
 
 private let basePath: String = "Targets/Gymlex"
+private let swiftPackagePath: String = "SwiftPackages"
 private let appName: String = "Gymlex"
 
 let project = Project(
     name: "Gymlex",
+    packages: [
+        .package(path: "\(swiftPackagePath)/Onboarding"),
+        .package(path: "\(swiftPackagePath)/UIComponents")
+    ],
     settings: Settings.settings(configurations: makeConfigurations()),
     targets: [
         Target(
@@ -20,7 +25,12 @@ let project = Project(
             deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
             infoPlist: makeInfoPList(),
             sources: ["\(basePath)/Sources/**"],
-            resources: ["\(basePath)/Resources/**"]
+            resources: ["\(basePath)/Resources/**"],
+            dependencies: [
+                .package(product: "Onboarding"),
+                .package(product: "UIComponents")
+            ],
+            settings: baseSettings()
         )
     ],
     additionalFiles: [
